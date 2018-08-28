@@ -1,4 +1,5 @@
 ﻿using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Signer;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace TaxiCoinCoreLibrary.ControllerFunctions
     {
         public static async Task<string> DeployContract(DefaultControllerPattern req, User user)
         {
+            user.PublicKey = EthECKey.GetPublicAddress(user.PrivateKey);
             TransactionReceipt contractReceipt;
             ContractFunctions contractFunctions;
             try

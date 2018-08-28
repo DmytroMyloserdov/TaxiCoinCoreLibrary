@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nethereum.Signer;
+using System;
 using System.Threading.Tasks;
 using TaxiCoinCoreLibrary.RequestObjectPatterns;
 using TaxiCoinCoreLibrary.TokenAPI;
@@ -10,6 +11,7 @@ namespace TaxiCoinCoreLibrary.ControllerFunctions
     {
         public static async Task<string> GetTokenBalance(User user)
         {
+            user.PublicKey = EthECKey.GetPublicAddress(user.PrivateKey);
             ulong res;
             var contractFunctions = Globals.GetInstance().ContractFunctions;
 
@@ -26,6 +28,7 @@ namespace TaxiCoinCoreLibrary.ControllerFunctions
 
         public static async Task<string> GetEthereumBalance(User user)
         {
+            user.PublicKey = EthECKey.GetPublicAddress(user.PrivateKey);
             var contractFunctions = Globals.GetInstance().ContractFunctions;
             string res;
 

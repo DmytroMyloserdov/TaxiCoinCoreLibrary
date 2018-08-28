@@ -1,4 +1,5 @@
 ﻿using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Signer;
 using Newtonsoft.Json;
 using System;
 using TaxiCoinCoreLibrary.RequestObjectPatterns;
@@ -11,6 +12,7 @@ namespace TaxiCoinCoreLibrary.ControllerFunctions
     {
         public static string DepositToContract(DepositPattern req, User user)
         {
+            user.PublicKey = EthECKey.GetPublicAddress(user.PrivateKey);
             TransactionReceipt result;
             try
             {

@@ -1,4 +1,5 @@
 ﻿using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Signer;
 using Newtonsoft.Json;
 using System;
 using TaxiCoinCoreLibrary.RequestObjectPatterns;
@@ -11,6 +12,7 @@ namespace TaxiCoinCoreLibrary.ControllerFunctions
     {
         public static string Create(UInt64 id, DefaultControllerPattern req, User user)
         {
+            user.PublicKey = EthECKey.GetPublicAddress(user.PrivateKey);
             TransactionReceipt result;
             try
             {
@@ -26,6 +28,7 @@ namespace TaxiCoinCoreLibrary.ControllerFunctions
 
         public static string Approve(UInt64 id, DefaultControllerPattern req, User user)
         {
+            user.PublicKey = EthECKey.GetPublicAddress(user.PrivateKey);
             TransactionReceipt result;
             try
             {
@@ -41,6 +44,7 @@ namespace TaxiCoinCoreLibrary.ControllerFunctions
 
         public static string DisApprove(UInt64 id, DefaultControllerPattern req, User user)
         {
+            user.PublicKey = EthECKey.GetPublicAddress(user.PrivateKey);
             TransactionReceipt result;
             try
             {
